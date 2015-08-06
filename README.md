@@ -3,8 +3,8 @@ lineapro-phonegap-plugin
 
 ## Quick start <-- this method currently only works on xcode build and not phonegap build
 1. Make sure you have Cordova installed and not Phonegap.  No idea why, but Cordova gave me less problems.<br>
-2.From command line:<br>
-2.1 cordova create HelloLineaproCitronium com.citronium.samples.hellolineapro<br>https://github.com/Little0ne95/Linea-Pro-Rachel-v1/edit/master/README.md#fullscreen
+2. From command line:<br>
+2.1 cordova create HelloLineaproCitronium com.citronium.samples.hellolineapro<br>
 2.2 cd HelloLineaproCitronium/<br>
 2.3 cordova plugins add https://github.com/Little0ne95/Linea-Pro-Rachel-v1.git<br>
 2.4 Open up the file HelloLineproCitronium/www/js/index.js and place the following text in the very top on a new line (do not delete any script)<br>
