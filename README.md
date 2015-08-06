@@ -44,8 +44,8 @@ Universal plugin for following devices:
 ## Additional info
 
 Using iOS SDK from http://www.datecs.bg/en/products/Universal-iOS-SDK/8/121
-Using Adive and guild created by https://gist.github.com/johnvilsack
-Tested on Cordova ver.3.3
+Using Advice and guild created by https://gist.github.com/johnvilsack
+Using Plugin base craeted by https://github.com/ttatarinov/lineapro-phonegap-plugin
 
 (c) Citronium, 2014
 http://citronium.com
