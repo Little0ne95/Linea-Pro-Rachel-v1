@@ -8,7 +8,7 @@ Cordova gave me less problems.
 2.1 cordova create HelloLineaproCitronium com.citronium.samples.hellolineapro
 2.2 cd HelloLineaproCitronium/
 2.3 cordova plugins add
-https://github.com/ttatarinov/lineapro-phonegap-plugin.git
+https://github.com/Little0ne95/Linea-Pro-Rachel-v1.git
 2.4 Open up the file HelloLineproCitronium/www/js/index.js and place the following text in the very top on a new line (do not delete any script)
 
 function onDeviceConnected(data) {
