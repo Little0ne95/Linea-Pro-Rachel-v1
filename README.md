@@ -1,21 +1,39 @@
 lineapro-phonegap-plugin
 ========================
 
-## Quick start
-To start plugin need to execute 'LineaProCDV.initDT()' method. 
-Recommended to add this into 'deviceready' handler.
+## Quick start <-- this method currently only works on xcode build and not phonegap build
+1. Make sure you have Cordova installed and not Phonegap.  No idea why, but
+Cordova gave me less problems.
+2. From command line:
+2.1 cordova create HelloLineaproCitronium com.citronium.samples.hellolineapro
+2.2 cd HelloLineaproCitronium/
+2.3 cordova plugins add
+https://github.com/ttatarinov/lineapro-phonegap-plugin.git
+2.4 Open up the file HelloLineproCitronium/www/js/index.js and place the following text in the very top on a new line (do not delete any script)
 
-###
-!!! You must add section "SupportedExternalAccessoryProtocols" into "[Project Name].plist" file. 
-This section should include the following items:
+function onDeviceConnected(data) {
+    alert("onDeviceConnected: " + data);
+}
 
-* com.datecs.linea.pro.msr
-* com.datecs.iserial.communication
-* com.datecs.pinpad
-* com.datecs.linea.pro.bar
+function onSuccessScanPaymentCard(data) {
+    alert("onSuccessScanPaymentCard: " + data);
+}
 
-### Sample cordova project
-The sample project which is using this plugin available here https://github.com/ttatarinov/lineapro-phonegap-plugin-example
+function onBarcodeScanned(data) {
+    alert("onBarcodeScanned: " + data.rawCodesArr);
+}
+
+2.5 In the same file add LineaProCDV.initDT(onDeviceConnected, onSuccessScanPaymentCard, onBarcodeScanned); directly under app.receivedEvent('deviceready');
+
+2.6 cordova platforms add ios
+2.7 cordova build ios
+3. Now open up HelloLineproCitronium/platforms/ios/HelloCordova.xcodeproj in XCode
+4. Build the program to your Linea target
+5. The program should start and alert OnDeviceConnected: 1
+
+**If you are using a device with a Lightning Connector YOU MUST DISCONNECTIT FROM THE COMPUTER**
+7. The program will alert OnDeviceConnected: 2
+8. Scan your barcode and watch the magic happen!
 
 ## Device support
 Universal plugin for following devices:
@@ -42,7 +60,7 @@ Universal plugin for following devices:
 ## Additional info
 
 Using iOS SDK from http://www.datecs.bg/en/products/Universal-iOS-SDK/8/121
-
+Using Adive and guild created by https://gist.github.com/johnvilsack
 Tested on Cordova ver.3.3
 
 (c) Citronium, 2014
