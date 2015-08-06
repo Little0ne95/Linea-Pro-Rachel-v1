@@ -3,7 +3,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     xmlns:rim="http://www.blackberry.com/ns/widgets"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    id="com.citronium.lineaprocdv"
+    id="com.citronium.lineaprocdv.v2"
     version="0.1">
     <name>LineaProCDV</name>
     <description>LineaProCDV</description>
