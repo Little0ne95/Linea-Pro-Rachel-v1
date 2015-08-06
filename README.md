@@ -2,34 +2,24 @@ lineapro-phonegap-plugin
 ========================
 
 ## Quick start <-- this method currently only works on xcode build and not phonegap build
-1. Make sure you have Cordova installed and not Phonegap.  No idea why, but
-Cordova gave me less problems.
-2. From command line:
-2.1 cordova create HelloLineaproCitronium com.citronium.samples.hellolineapro
-2.2 cd HelloLineaproCitronium/
-2.3 cordova plugins add
-https://github.com/Little0ne95/Linea-Pro-Rachel-v1.git
-2.4 Open up the file HelloLineproCitronium/www/js/index.js and place the following text in the very top on a new line (do not delete any script)
+1. Make sure you have Cordova installed and not Phonegap.  No idea why, but Cordova gave me less problems.<br>
+2.From command line:<br>
+2.1 cordova create HelloLineaproCitronium com.citronium.samples.hellolineapro<br>https://github.com/Little0ne95/Linea-Pro-Rachel-v1/edit/master/README.md#fullscreen
+2.2 cd HelloLineaproCitronium/<br>
+2.3 cordova plugins add https://github.com/Little0ne95/Linea-Pro-Rachel-v1.git<br>
+2.4 Open up the file HelloLineproCitronium/www/js/index.js and place the following text in the very top on a new line (do not delete any script)<br>
+<code>
+function onDeviceConnected(data) { alert("onDeviceConnected: " + data);}
+function onSuccessScanPaymentCard(data) { alert("onSuccessScanPaymentCard: " + data);}
+function onBarcodeScanned(data) {alert("onBarcodeScanned: " + data.rawCodesArr);}
+</code><br>
+2.5 In the same file add LineaProCDV.initDT(onDeviceConnected, onSuccessScanPaymentCard, onBarcodeScanned); directly under app.receivedEvent('deviceready');<br>
 
-function onDeviceConnected(data) {
-    alert("onDeviceConnected: " + data);
-}
-
-function onSuccessScanPaymentCard(data) {
-    alert("onSuccessScanPaymentCard: " + data);
-}
-
-function onBarcodeScanned(data) {
-    alert("onBarcodeScanned: " + data.rawCodesArr);
-}
-
-2.5 In the same file add LineaProCDV.initDT(onDeviceConnected, onSuccessScanPaymentCard, onBarcodeScanned); directly under app.receivedEvent('deviceready');
-
-2.6 cordova platforms add ios
-2.7 cordova build ios
-3. Now open up HelloLineproCitronium/platforms/ios/HelloCordova.xcodeproj in XCode
-4. Build the program to your Linea target
-5. The program should start and alert OnDeviceConnected: 1
+2.6 cordova platforms add ios<br>
+2.7 cordova build ios<br>
+3. Now open up HelloLineproCitronium/platforms/ios/HelloCordova.xcodeproj in XCode<br>
+4. Build the program to your Linea target<br>
+5. The program should start and alert OnDeviceConnected: 1<br>
 
 **If you are using a device with a Lightning Connector YOU MUST DISCONNECTIT FROM THE COMPUTER**
 7. The program will alert OnDeviceConnected: 2
