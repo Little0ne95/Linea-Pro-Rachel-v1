@@ -1,7 +1,7 @@
 lineapro-phonegap-plugin
 ========================
 
-## Quick start <-- this method currently only works on xcode build and not phonegap build
+## Quick start <-- this method is for xcode bbuild
 1. Make sure you have Cordova installed and not Phonegap.  No idea why, but Cordova gave me less problems.<br>
 2. From command line.<br>
 3. cordova create HelloLineaproCitronium com.citronium.samples.hellolineapro<br>
@@ -18,6 +18,38 @@ lineapro-phonegap-plugin
 **If you are using a device with a Lightning Connector YOU MUST DISCONNECTIT FROM THE COMPUTER**
 7. The program will alert OnDeviceConnected: 2
 8. Scan your barcode and watch the magic happen!
+
+## Quick start <-- this method is for use with phonegap build<br>
+1.	Make sure you have Cordova installed and Phonegap<br>
+2.	In the command line type: phonegap create HelloLineaproCitronium com.citronium.samples.hellolineapro<br>
+3.	In the command line type:  cd HelloLineaproCitroniumTEST/<br>
+4.	In the command line type:  phonegap  plugins add https://github.com/Little0ne95/Linea-Pro-Rachel-v1.git<br>
+5.	Open up the file HelloLineproCitronium/www/js/index.js and place the following text in the very top on a new line (do not delete any script)<br>
+<code>function onDeviceConnected(data) { alert("onDeviceConnected: " + data);} </code><br>
+<code>function onSuccessScanPaymentCard(data) { alert("onSuccessScanPaymentCard: " + data);}</code><br>
+<code>function onBarcodeScanned(data) {alert("onBarcodeScanned: " + data.rawCodesArr);}</code><br>
+6.	In the same file add <br>
+<code>LineaProCDV.initDT(onDeviceConnected, onSuccessScanPaymentCard, onBarcodeScanned);</code>  
+directly under <br>
+<code> app.receivedEvent('deviceready'); </code><br>
+7.	In the config.xml file add<br>
+<code><</code><code>gap:plugin name="cordova-plugin-whitelist" version="1" source="npm" /></code><br>
+<code><</code><code>gap:plugin name="com.lineapro-plugin.rachel" version="0.1" source="pgb" /></code><br>
+8.	In the index.html inside www folder add the following line<br>
+<code><</code><code>script type="text/javascript" src="plugins/com.citronium.lineaprocdv.v2/www/LineaProCDV.js"></script></code><br>
+9.	Back in the command line type: Cordova platforms add iOS<br>
+10.	In the command line type: Cordova  build ios<br>
+11.	In the command line type:  Phonegap build iOS<br>
+12.	Now copy the config.xml file into platforms/iOS/www<br>
+13.	To upload to phonegap, zip the www folder  which is inside platforms/iOS. This is the file you upload to phonegap build.<br>
+14.	Enable debugging & Enable hydration ( This is once you have uploaded the file into phonegap build)<br>
+15.	Click “ready to build”<br>
+16.	Select your iOS Key ( you may need to  add this use this documentation if you don’t know how to http://docs.build.phonegap.com/en_US/3.3.0/signing_signing-ios.md.html . You will need an apple developer licence)<br>
+17.	Once built scan the QR code with a QR reader on your device ( your ipod/ihone will have to be in developer mode, you can do this by connecting to xcode on a mac or follow ne of the many guids online)<br>
+18.	Click on install when the notification shows<br>
+19.	The app should now be one your device.<br>
+
+
 
 ## Device support
 Universal plugin for following devices:
