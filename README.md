@@ -33,7 +33,6 @@ lineapro-phonegap-plugin
 directly under <br>
 <code> app.receivedEvent('deviceready'); </code><br>
 7.	In the config.xml file add<br>
-<code><</code><code>gap:plugin name="cordova-plugin-whitelist" version="1" source="npm" /></code><br>
 <code><</code><code>gap:plugin name="com.lineapro-plugin.rachel" version="0.1" source="pgb" /></code><br>
 8.	In the index.html inside www folder add the following line<br>
 <code><</code><code>script type="text/javascript" src="plugins/com.citronium.lineaprocdv.v2/www/LineaProCDV.js"></script></code><br>
@@ -49,6 +48,36 @@ directly under <br>
 18.	Click on install when the notification shows<br>
 19.	The app should now be one your device.<br>
 
+## ios 9 Update - phonegap problems
+There are a few things too fix if you are using ios 9 these include the screen not responding to touch and the black borders.
+Fixing Screen not responding to touch:-
+ 1. Go to your app on Phone Gap Build
+ 2. Select Settings
+ 3. Unclick Enable Hydration
+ 
+Fixing the black borders:- </br>
+1. Create 10 Splash screens as following:-</br> iosDefault~iphone.png width= 320px height= 480px </br> Default@2x~iphone.png width= 640px height= 960px </br> Default-568h@2x.png width= 640px height= 1136px </br> Default-667h@2x.png width= 750px height= 1334px</br> Default-Portrait-736h@3x.png width= 1242px height= 2208px</br> Default-Landscape-736h@3x.png width= 2208px height= 1242px</br> Default-Portrait.png width= 768px height= 1024px</br> Default-Landscape.png width= 1024px height= 768px</br> Default-Portrait@2x.png width= 1536px height= 2048px</br> Default-Landsc10 ape@2x.png width= 2048px height= 1536px</br>
+2. Add these images to the file res/screen/ios/</br>
+3. Add this code to your config.xml</br>
+<code><!-- iPhone and iPod touch --></code></br>
+<code><</code><code>gap:splash src="res/screen/iosDefault~iphone.png" gap:platform="ios" width="320" height="480" /></code></br>
+<code><</code><code>gap:splash src="res/screen/ios/Default@2x~iphone.png" gap:platform="ios" width="640" height="960" /></code></br>
+
+<code><!-- iPhone 5 / iPod Touch (5th Generation) --></code></br>
+<code><</code><code>gap:splash src="res/screen/ios/Default-568h@2x.png" gap:platform="ios" width="640" height="1136" /></code></br>
+
+<code><!-- iPhone 6 --></code></br>
+<code><</code><code>gap:splash src="res/screen/ios/Default-667h@2x.png" gap:platform="ios" width="750" height="1334" /></code></br>
+<code><</code><code>gap:splash src="res/screen/ios/Default-Portrait-736h@3x.png" gap:platform="ios" width="1242" height="2208" /></code></br>
+<code><</code><code>gap:splash src="res/screen/ios/Default-Landscape-736h@3x.png" gap:platform="ios" width="2208" height="1242" /></code></br>
+
+<code><!-- iPad --></code></br>
+<code><</code><code>gap:splash src="res/screen/ios/Default-Portrait.png" gap:platform="ios" width="768" height="1024" /></code></br>
+<code><</code><code>gap:splash src="res/screen/ios/Default-Landscape.png" gap:platform="ios" width="1024" height="768" /></code></br>
+
+<code><!-- Retina iPad --></code></br>
+<code><</code><code>gap:splash src="res/screen/ios/Default-Portrait@2x.png" gap:platform="ios" width="1536" height="2048" /></code></br>
+<code><</code><code>gap:splash src="res/screen/ios/Default-Landscape@2x.png" gap:platform="ios" width="2048" height="1536" /></code></br>
 
 
 ## Device support
