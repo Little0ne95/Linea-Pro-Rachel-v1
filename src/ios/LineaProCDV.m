@@ -19,8 +19,13 @@
 -(void) scannerConect:(NSString*)num {
     
     NSString *jsStatement = [NSString stringWithFormat:@"reportConnectionStatus('%@');", num];
-    [self.webView stringByEvaluatingJavaScriptFromString:jsStatement];
-    
+    if ([self.webView respondsToSelector:@selector(stringByEvaluatingJavaScriptFromString:)]) {
+        // Cordova-iOS pre-4
+        [self.webView performSelectorOnMainThread:@selector(stringByEvaluatingJavaScriptFromString:) withObject:jsStatement waitUntilDone:NO];
+    } else {
+        // Cordova-iOS 4+
+        [self.webView performSelectorOnMainThread:@selector(evaluateJavaScript:completionHandler:) withObject:jsStatement waitUntilDone:NO];
+    }
 }
 
 -(void) scannerBattery:(NSString*)num {
@@ -34,7 +39,13 @@
         
         // send to web view
         NSString *jsStatement = [NSString stringWithFormat:@"reportBatteryStatus('%@');", status];
-        [self.webView stringByEvaluatingJavaScriptFromString:jsStatement];
+        if ([self.webView respondsToSelector:@selector(stringByEvaluatingJavaScriptFromString:)]) {
+            // Cordova-iOS pre-4
+            [self.webView performSelectorOnMainThread:@selector(stringByEvaluatingJavaScriptFromString:) withObject:jsStatement waitUntilDone:NO];
+        } else {
+            // Cordova-iOS 4+
+            [self.webView performSelectorOnMainThread:@selector(evaluateJavaScript:completionHandler:) withObject:jsStatement waitUntilDone:NO];
+        }
         
     }
 }
@@ -42,8 +53,13 @@
 -(void) scanPaymentCard:(NSString*)num {
     
     NSString *jsStatement = [NSString stringWithFormat:@"onSuccessScanPaymentCard('%@');", num];
-    [self.webView stringByEvaluatingJavaScriptFromString:jsStatement];
-	[self.viewController dismissViewControllerAnimated:YES completion:nil];
+    if ([self.webView respondsToSelector:@selector(stringByEvaluatingJavaScriptFromString:)]) {
+        // Cordova-iOS pre-4
+        [self.webView performSelectorOnMainThread:@selector(stringByEvaluatingJavaScriptFromString:) withObject:jsStatement waitUntilDone:NO];
+    } else {
+        // Cordova-iOS 4+
+        [self.webView performSelectorOnMainThread:@selector(evaluateJavaScript:completionHandler:) withObject:jsStatement waitUntilDone:NO];
+    }	[self.viewController dismissViewControllerAnimated:YES completion:nil];
     
 }
 
@@ -95,7 +111,14 @@
 	}
     
     NSString* retStr = [ NSString stringWithFormat:@"LineaProCDV.connectionChanged(%d);", state];
-    [[super webView] stringByEvaluatingJavaScriptFromString:retStr];
+    //[[super webView] stringByEvaluatingJavaScriptFromString:retStr];
+    if ([self.webView respondsToSelector:@selector(stringByEvaluatingJavaScriptFromString:)]) {
+                        // Cordova-iOS pre-4
+                        [self.webView performSelectorOnMainThread:@selector(stringByEvaluatingJavaScriptFromString:) withObject:retStr waitUntilDone:NO];
+                    } else {
+                            // Cordova-iOS 4+
+                            [self.webView performSelectorOnMainThread:@selector(evaluateJavaScript:completionHandler:) withObject:retStr waitUntilDone:NO];
+                        }
 }
 
 - (void) deviceButtonPressed: (int) which {
@@ -122,7 +145,13 @@
         NSLog(@"magneticCardData (full info): accountNumber - %@, cardholderName - %@, expirationYear - %@, expirationMonth - %@, serviceCode - %@, discretionaryData - %@, firstName - %@, lastName - %@", [card objectForKey:@"accountNumber"], [card objectForKey:@"cardholderName"], [card objectForKey:@"expirationYear"], [card objectForKey:@"expirationMonth"], [card objectForKey:@"serviceCode"], [card objectForKey:@"discretionaryData"], [card objectForKey:@"firstName"], [card objectForKey:@"lastName"]);
     }
     NSString* retStr = [ NSString stringWithFormat:@"LineaProCDV.onMagneticCardData('%@', '%@', '%@');", track1, track2, track3];
-    [[super webView] stringByEvaluatingJavaScriptFromString:retStr];
+    if ([self.webView respondsToSelector:@selector(stringByEvaluatingJavaScriptFromString:)]) {
+        // Cordova-iOS pre-4
+        [self.webView performSelectorOnMainThread:@selector(stringByEvaluatingJavaScriptFromString:) withObject:retStr waitUntilDone:NO];
+    } else {
+        // Cordova-iOS 4+
+        [self.webView performSelectorOnMainThread:@selector(evaluateJavaScript:completionHandler:) withObject:retStr waitUntilDone:NO];
+    }
 }
 
 - (void) magneticCardEncryptedData: (int) encryption tracks:(int) tracks data:(NSData *) data {
@@ -177,13 +206,25 @@
 - (void) barcodeData: (NSString *) barcode type:(int) type {
     NSLog(@"barcodeData: barcode - %@, type - %@", barcode, [dtdev barcodeType2Text:type]);
     NSString* retStr = [ NSString stringWithFormat:@"LineaProCDV.onBarcodeData('%@', '%@');", barcode, [dtdev barcodeType2Text:type]];
-    [[super webView] stringByEvaluatingJavaScriptFromString:retStr];
+    if ([self.webView respondsToSelector:@selector(stringByEvaluatingJavaScriptFromString:)]) {
+        // Cordova-iOS pre-4
+        [self.webView performSelectorOnMainThread:@selector(stringByEvaluatingJavaScriptFromString:) withObject:retStr waitUntilDone:NO];
+    } else {
+        // Cordova-iOS 4+
+        [self.webView performSelectorOnMainThread:@selector(evaluateJavaScript:completionHandler:) withObject:retStr waitUntilDone:NO];
+    }
 }
 
 - (void) barcodeNSData: (NSData *) barcode isotype:(NSString *) isotype {
     NSLog(@"barcodeNSData: barcode - %@, type - %@", [[NSString alloc] initWithData:barcode encoding:NSUTF8StringEncoding], isotype);
     NSString* retStr = [ NSString stringWithFormat:@"LineaProCDV.onBarcodeData('%@', '%@');", [[NSString alloc] initWithData:barcode encoding:NSUTF8StringEncoding], isotype];
-    [[super webView] stringByEvaluatingJavaScriptFromString:retStr];
+    if ([self.webView respondsToSelector:@selector(stringByEvaluatingJavaScriptFromString:)]) {
+        // Cordova-iOS pre-4
+        [self.webView performSelectorOnMainThread:@selector(stringByEvaluatingJavaScriptFromString:) withObject:retStr waitUntilDone:NO];
+    } else {
+        // Cordova-iOS 4+
+        [self.webView performSelectorOnMainThread:@selector(evaluateJavaScript:completionHandler:) withObject:retStr waitUntilDone:NO];
+    }
 }
 
 + (NSString*) getPDF417ValueByCode: (NSArray*) codesArr code:(NSString*)code {
@@ -243,8 +284,13 @@
     NSString* rawCodesArrJSString = [LineaProCDV generateStringForArrayEvaluationInJS:codesArr];
     //LineaProCDV.onBarcodeData(scanId, dob, state, city, expires, gender, height, weight, hair, eye)
     NSString* retStr = [ NSString stringWithFormat:@"var rawCodesArr = %@; LineaProCDV.onBarcodeData(rawCodesArr, '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@');", rawCodesArrJSString, license, dateBirth, state, city, expires, gender, height, weight, hair, eye, name, lastName];
-    [[super webView] stringByEvaluatingJavaScriptFromString:retStr];
-}
+    if ([self.webView respondsToSelector:@selector(stringByEvaluatingJavaScriptFromString:)]) {
+        // Cordova-iOS pre-4
+        [self.webView performSelectorOnMainThread:@selector(stringByEvaluatingJavaScriptFromString:) withObject:retStr waitUntilDone:NO];
+    } else {
+        // Cordova-iOS 4+
+        [self.webView performSelectorOnMainThread:@selector(evaluateJavaScript:completionHandler:) withObject:retStr waitUntilDone:NO];
+    }}
 
 - (void) bluetoothDeviceConnected: (NSString *) address {
     NSLog(@"bluetoothDeviceConnected: address - %@", address);
